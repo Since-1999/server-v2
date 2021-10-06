@@ -31,12 +31,12 @@ export class SearchMarkController {
 
                 if (student != null && student.length != 0) {
                     let studentDto: StudentDTO = new StudentDTO();
-                    studentDto.code = student[0].mssv;
-                    studentDto.name = `${student[0].hotenlot} ${student[0].ten}`;
-                    studentDto.class = student[0].lop;
-                    studentDto.mark = student[0].diemtbtl;
-                    studentDto.subject = student[0].mhtichluy;
-                    studentDto.credits = student[0].tctichluy;
+                    studentDto.code = student[0].Column2;
+                    studentDto.name = `${student[0].Column3} ${student[0].Column4}`;
+                    studentDto.class = student[0].Column5;
+                    studentDto.mark = student[0].Column35;
+                    studentDto.subject = student[0].Column37;
+                    studentDto.credits = student[0].Column36;
 
 
                     return res.status(200).json([{
