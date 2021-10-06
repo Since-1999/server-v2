@@ -3,7 +3,7 @@ import { StudentDTO } from 'core/dto/StudentDTO';
 import { CourseException } from 'core/exception/CourseException';
 import { StudentException } from 'core/exception/StudentException';
 import { Courses, CourseUtil } from 'core/utils/CourseUtil';
-import {  FacultyUtil } from 'core/utils/FacultyUtil';
+import { FacultyUtil } from 'core/utils/FacultyUtil';
 import { StudentUtil } from 'core/utils/StudentUtil';
 import { Response } from 'express';
 import { SearchMarkService } from './service/search-mark.service';
@@ -11,13 +11,13 @@ import { SearchMarkService } from './service/search-mark.service';
 @Controller('search-mark')
 export class SearchMarkController {
 
-    constructor(private searchMark: SearchMarkService){}
+    constructor(private searchMark: SearchMarkService) { }
 
     @Get()
-    async getMarkByStudentId(@Query('studentCode') studentCode: string, @Res() res: Response){        
+    async getMarkByStudentId(@Query('studentCode') studentCode: string, @Res() res: Response) {
         let resultCheck = StudentUtil.validateStudentCode(studentCode);
 
-        if(resultCheck == true){
+        if (resultCheck == true) {
             let facultyCode = FacultyUtil.getFacultyCode(studentCode);
             let course = CourseUtil.getCourse(studentCode);
 
@@ -26,10 +26,10 @@ export class SearchMarkController {
                 course == Courses.COURSE_18 ||
                 course == Courses.COURSE_19 ||
                 course == Courses.COURSE_20
-              ) {
-                  let student = await this.searchMark.getMarkByStudentCode(studentCode, course, facultyCode);
-                    
-                  if(student != null && student.length != 0){
+            ) {
+                let student = await this.searchMark.getMarkByStudentCode(studentCode, course, facultyCode);
+
+                if (student != null && student.length != 0) {
                     let studentDto: StudentDTO = new StudentDTO();
                     studentDto.code = student[0].mssv;
                     studentDto.name = `${student[0].hotenlot} ${student[0].ten}`;
@@ -38,23 +38,23 @@ export class SearchMarkController {
                     studentDto.subject = student[0].mhtichluy;
                     studentDto.credits = student[0].tctichluy;
 
-                    
+
                     return res.status(200).json([{
                         "text": StudentUtil.getTemplateInforStudent(studentDto)
                     }]);
-                  }else{
+                } else {
                     return res.status(200).json([{
                         "text": StudentException.STUDENT_NOT_FOUND
                     }]);
-                  }
+                }
 
-              }else{
+            } else {
                 return res.status(200).json([{
                     "text": CourseException.getExceptionNotFoundCourse(course)
                 }]);
-              }
+            }
 
-        }else{
+        } else {
             return res.status(200).json([{
                 "text": StudentException.STUDENT_CODE_ISVALID
             }]);
