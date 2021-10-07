@@ -18,15 +18,15 @@ export class StudentUtil{
     }
 
     static getTemplateInforStudent(student: StudentDTO): string {
-        return `
-                MSSV: ${student.code}
-                Sinh Viên: ${student.name}
+        return `💳 MSSV: ${student.code}
+                📕 Sinh Viên: ${student.name}
                 Lớp: ${student.class}
+                
                 (Hệ 10) 
                 Điểm tích lũy: ${student.mark}
-                Môn học tích lũy: ${student.subject}
-                Tín chỉ tích lũy: ${student.credits}
-                Kết Quả Được Cập Nhật Lần Cuối Ngày 25/03/2021, Lưu ý chỉ mang tính chất tham khảo
-            `;
+                Môn học tích lũy: ${student.subject} Môn học
+                Tín chỉ tích lũy: ${student.credits} Tín chỉ
+
+                Kết Quả Được Cập Nhật Lần Cuối Ngày 25/03/2021, Lưu ý chỉ mang tính chất tham khảo`;
     }
 }
