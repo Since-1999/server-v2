@@ -39,25 +39,43 @@ export class SearchMarkController {
                     studentDto.credits = student[0].Column36;
 
 
-                    return res.status(200).json([{
-                        "text": StudentUtil.getTemplateInforStudent(studentDto)
-                    }]);
+                    return res.status(200).json({
+                        "messages":[
+                            {
+                                "text": StudentUtil.getTemplateInforStudent(studentDto)
+                            }
+                        ]
+                        
+                    });
                 } else {
-                    return res.status(200).json([{
-                        "text": StudentException.STUDENT_NOT_FOUND
-                    }]);
+                    return res.status(200).json({
+                        "messages": [
+                            {
+                                "text": StudentException.STUDENT_NOT_FOUND
+                            }    
+                        ]
+                        
+                    });
                 }
 
             } else {
-                return res.status(200).json([{
-                    "text": CourseException.getExceptionNotFoundCourse(course)
-                }]);
+                return res.status(200).json({
+                    "messages": [
+                        {
+                            "text": CourseException.getExceptionNotFoundCourse(course)
+                        }
+                    ]                    
+                });
             }
 
         } else {
-            return res.status(200).json([{
-                "text": StudentException.STUDENT_CODE_ISVALID
-            }]);
+            return res.status(200).json({
+                "messages":[
+                    {
+                        "text": StudentException.STUDENT_CODE_ISVALID
+                    }
+                ]
+            });
         }
     }
 }
