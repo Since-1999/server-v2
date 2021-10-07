@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import { Body, Controller,  Post,  Res } from '@nestjs/common';
 import { StudentDTO } from 'core/dto/StudentDTO';
 import { CourseException } from 'core/exception/CourseException';
 import { StudentException } from 'core/exception/StudentException';
@@ -13,13 +13,13 @@ export class SearchMarkController {
 
     constructor(private searchMark: SearchMarkService) { }
 
-    @Get()
-    async getMarkByStudentId(@Query('studentCode') studentCode: string, @Res() res: Response) {
-        let resultCheck = StudentUtil.validateStudentCode(studentCode);
+    @Post()
+    async getMarkByStudentId(@Body() data: any, @Res() res: Response) {
+        let resultCheck = StudentUtil.validateStudentCode(data.studentCode);
 
         if (resultCheck == true) {
-            let facultyCode = FacultyUtil.getFacultyCode(studentCode);
-            let course = CourseUtil.getCourse(studentCode);
+            let facultyCode = FacultyUtil.getFacultyCode(data.studentCode);
+            let course = CourseUtil.getCourse(data.studentCode);
 
             if (
                 course == Courses.COURSE_17 ||
@@ -27,7 +27,7 @@ export class SearchMarkController {
                 course == Courses.COURSE_19 ||
                 course == Courses.COURSE_20
             ) {
-                let student = await this.searchMark.getMarkByStudentCode(studentCode, course, facultyCode);
+                let student = await this.searchMark.getMarkByStudentCode(data.studentCode, course, facultyCode);
 
                 if (student != null && student.length != 0) {
                     let studentDto: StudentDTO = new StudentDTO();
