@@ -13,6 +13,8 @@ export class SearchMarkService {
                 return await this.connection.query(`SELECT * FROM CK${course} WHERE COLUMN2 = ?`, [studentCode]);
             case Faculties.FACULTY_OF_ELECTRICAL_AND_ELECTRONICS:
                 return await this.connection.query(`SELECT * FROM DD${course} WHERE COLUMN2 = ?`, [studentCode]);
+            case Faculties.FACULTY_OF_ELECTRONICS_AND_TELECOMMUNICATIONS:
+                return await this.connection.query(`SELECT * FROM DD${course} WHERE COLUMN2 = ?`, [studentCode]);
             case Faculties.FACULTY_OF_INFORMATION_TECHNOLOGY:
                 return await this.connection.query(`SELECT * FROM CNTT${course} WHERE COLUMN2 = ?`, [studentCode]);
             case Faculties.FACULTY_OF_FOOD_TECHNOLOGY:
