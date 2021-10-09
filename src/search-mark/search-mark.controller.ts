@@ -1,4 +1,4 @@
-import { Body, Controller,  Post,  Res } from '@nestjs/common';
+import { Body, Controller,  Get,    HttpStatus,  Post,  Res } from '@nestjs/common';
 import { StudentDTO } from 'core/dto/StudentDTO';
 import { CourseException } from 'core/exception/CourseException';
 import { StudentException } from 'core/exception/StudentException';
@@ -77,5 +77,5 @@ export class SearchMarkController {
                 ]
             });
         }
-    }
+    } 
 }
