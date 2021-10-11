@@ -18,8 +18,8 @@ export class UserController {
         })
     }
 
-    @Get('/getmarkstudentfile')
-    async getMarkStudentFile(@Res() res: Response): Promise<Response>{
+    @Post('/getmarkstudentfile')
+    async getMarkStudentFile(@Body() data: any, @Res() res: Response): Promise<Response>{
         return res.status(HttpStatus.OK).json({
             message: `This is get mark student file.`
         })
